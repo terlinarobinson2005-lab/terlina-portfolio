@@ -1,4 +1,7 @@
 body {
+  background: yellow !important;
+}
+body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background-color: #fdf6f6;
