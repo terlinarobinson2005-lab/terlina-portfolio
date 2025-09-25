@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terlina Robinson — Portfolio</title>
+  <meta name="description" content="Digital marketing, UI/UX, and IT projects by Terlina Robinson. Creative campaigns, modern design, and growth-focused strategy." />
+  <meta property="og:title" content="Terlina Robinson — Portfolio" />
+  <meta property="og:description" content="Digital marketing, UI/UX, and IT projects by Terlina Robinson. Creative campaigns, modern design, and growth-focused strategy." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0f172a" />
+  <style>
+    :root{
+      --bg:#0f172a;           /* slate-900 */
+      --panel:#0b1224;        /* deep panel */
+      --ink:#e5e7eb;          /* gray-200 */
+      --muted:#9ca3af;        /* gray-400 */
+      --accent:#7c3aed;       /* violet-600 */
+      --accent-2:#22d3ee;     /* cyan-400 */
+      --brand:#f59e0b;        /* amber-500 */
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 70% -20%, rgba(124,58,237,.18), transparent 60%),
+                  radial-gradient(800px 400px at -10% 80%, rgba(34,211,238,.14), transparent 60%),
+                  var(--bg);
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+
+    /* Splash: camera intro */
+    .splash{
+      position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
+      background:linear-gradient(180deg, #0b1022 0%, #060a16 100%);
+      transition:opacity .8s ease, visibility .8s ease;
+    }
+    .splash.hidden{opacity:0; visibility:hidden;}
+
+    .camera{
+      position:relative; width:min(92vw, 980px); aspect-ratio:16/9; border-radius:22px; 
+      background: linear-gradient(145deg, #151b34, #0b1224);
+      box-shadow: 0 30px 60px rgba(0,0,0,.55), inset 0 0 0 2px rgba(255,255,255,.04);
+      overflow:hidden; isolation:isolate;
+    }
+    /* camera body details */
+    .camera::before{ /* top plate */
+      content:""; position:absolute; left:0; right:0; top:0; height:58px; 
+      background:linear-gradient(to bottom, rgba(255,255,255,.06), rgba(255,255,255,0));
+    }
+    .camera::after{ /* bottom shadow */
+      content:""; position:absolute; inset:auto 0 0 0; height:80px;
+      background:linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+
+    /* viewfinder content behind shutter */
+    .vf{
+      position:absolute; inset:0; display:grid; place-items:center; padding:24px;
+      background:
+        radial-gradient(600px 300px at 30% 30%, rgba(124,58,237,.18), transparent 60%),
+        radial-gradient(700px 360px at 70% 80%, rgba(34,211,238,.12), transparent 60%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px),
+        linear-gradient(180deg, #0b1224, #0a0f1f);
+    }
+
+    .vf-grid{ position:absolute; inset:0; background:
+      linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px) 0 0/ 22px 22px,
+      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px) 0 0/ 22px 22px;
+      pointer-events:none; mix-blend:screen; opacity:.35;
+    }
+
+    .hero{
+      text-align:center; max-width:820px; z-index:2;
+    }
+    .eyebrow{letter-spacing:.2em; text-transform:uppercase; font-size:.8rem; color:var(--muted);}
+    h1{margin:.25rem 0 .75rem; font-size:clamp(1.8rem, 4vw, 3.2rem); line-height:1.1;}
+    .lead{color:#cbd5e1; font-size:clamp(1rem, 1.2vw, 1.125rem);}
+
+    .cta-row{margin-top:22px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+    .btn{appearance:none; border:0; cursor:pointer; padding:12px 18px; border-radius:14px; font-weight:600; backdrop-filter:saturate(120%);
+      box-shadow: 0 10px 22px rgba(124,58,237,.25), inset 0 0 0 1px rgba(255,255,255,.07);
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn.primary{ background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b1020; }
+    .btn.secondary{ background:rgba(255,255,255,.06); color:var(--ink);} 
+    .btn:hover{ transform: translateY(-2px); }
+
+    /* shutter overlay */
+    .shutter{
+      position:absolute; inset:0; display:grid; place-items:center; z-index:5; pointer-events:none;
+    }
+    .shutter::before{
+      content:""; width:140vmax; height:140vmax; border-radius:50%; 
+      background:
+        radial-gradient( circle at 50% 50%, rgba(255,255,255,.08) 0 25%, transparent 26% 100%),
+        repeating-conic-gradient(from 0deg, rgba(0,0,0,.92) 0 20deg, rgba(0,0,0,.98) 20deg 40deg);
+      box-shadow: inset 0 0 120px rgba(0,0,0,.8);
+      transform: scale(1);
+      clip-path: circle(72% at 50% 50%);
+      transition: clip-path 1.2s cubic-bezier(.2,.8,.2,1);
+    }
+    .camera.open .shutter::before{ clip-path: circle(0% at 50% 50%); }
+
+    /* shutter button */
+    .ui{
+      position:absolute; right:24px; top:14px; display:flex; align-items:center; gap:10px; z-index:6;
+    }
+    .button{
+      pointer-events:auto; user-select:none; background:linear-gradient(180deg, #262d4a, #131a32); color:#e5e7eb;
+      border-radius:999px; padding:10px 16px; font-weight:700; font-size:.9rem; border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 12px 24px rgba(0,0,0,.35); cursor:pointer; transition:transform .08s ease;
+    }
+    .button:active{ transform:translateY(1px); }
+
+    .switch{ display:flex; align-items:center; gap:8px; font-size:.85rem; color:#cbd5e1; }
+    .switch input{ accent-color: var(--accent); width:18px; height:18px; }
+
+    /* skip motion preference */
+    @media (prefers-reduced-motion: reduce){
+      .shutter::before{ transition:none; clip-path: circle(0% at 50% 50%); }
+      .splash{ transition:none; }
+    }
+
+    /* Main site wrapper shown after intro finishes */
+    .site{ opacity:0; transform:translateY(8px); transition:opacity .7s ease .1s, transform .7s ease .1s; }
+    .site.visible{ opacity:1; transform:none; }
+
+    header.nav{ position:sticky; top:0; z-index:50; backdrop-filter: blur(8px) saturate(120%);
+      background:rgba(2,6,23,.55); border-bottom:1px solid rgba(255,255,255,.06); }
+    .nav-inner{ max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:12px 18px; }
+    .brand{ font-weight:800; letter-spacing:.02em; }
+    .links a{ color:#cbd5e1; text-decoration:none; margin-left:16px; font-weight:600; }
+    .links a:hover{ color:white; }
+
+    .section{ max-width:1100px; margin:0 auto; padding:56px 18px; }
+    .cards{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px; }
+    .card{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:18px; }
+    .card h3{ margin:0 0 8px; }
+
+    footer{ color:#94a3b8; border-top:1px solid rgba(255,255,255,.06); }
+  </style>
+</head>
+<body>
+
+  <!-- Splash Camera Intro -->
+  <div class="splash" id="splash" aria-label="Intro overlay">
+    <div class="camera" id="camera">
+      <div class="vf">
+        <div class="vf-grid"></div>
+        <div class="hero" role="presentation">
+          <div class="eyebrow">Portfolio Preview</div>
+          <h1>Through My Lens</h1>
+          <p class="lead">Digital marketing, design, and technology work. Click the shutter to enter.</p>
+        </div>
+      </div>
+      <div class="shutter" aria-hidden="true"></div>
+      <div class="ui">
+        <button class="button" id="shutterBtn" aria-label="Open portfolio">Shutter</button>
+        <label class="switch" title="Skip intro on next visit">
+          <input type="checkbox" id="skipIntro" />
+          <span>Skip next time</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Site -->
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">Terlina Robinson</div>
+      <nav class="links" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site" id="site">
+    <section class="section" id="hero">
+      <div class="hero">
+        <div class="eyebrow">Digital Marketing • Design • IT</div>
+        <h1>Crafting strategies and designing experiences that grow brands</h1>
+        <p class="lead">Campaigns, content, and UI that convert. I combine data, storytelling, and clean interfaces to make products and brands win online.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#work">View Work</a>
+          <a class="btn secondary" href="#contact">Contact</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <h2>Selected Work</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Reserve Yourz — Digital Marketing</h3>
+          <p>Content strategy, reels, and paid-ready creatives; social growth with clear KPIs.</p>
+        </article>
+        <article class="card">
+          <h3>Serrephia Cosmetics — Brand & Social</h3>
+          <p>Visual identity refresh and a month of content pillars focused on conversions.</p>
+        </article>
+        <article class="card">
+          <h3>IntelliTransit — App UX</h3>
+          <p>Routes, ticketing flow, and a clean UI for a smart public bus solution.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <h2>Services</h2>
+      <div class="cards">
+        <div class="card"><h3>Digital Marketing</h3><p>Campaign planning, social media strategy, analytics, KPI tracking.</p></div>
+        <div class="card"><h3>Content Creation</h3><p>Reels, ad creatives, brand storytelling, copy that converts.</p></div>
+        <div class="card"><h3>UI/UX</h3><p>Wireframes, prototypes, and accessible, conversion-focused interfaces.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <h2>About</h2>
+      <p>I am a digital marketing assistant and designer with a BSc in IT. I bring marketing strategy and UX thinking together to deliver measurable outcomes.</p>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:terlzrobinson@gmail.com">terlzrobinson@gmail.com</a> · Colombo, Sri Lanka</p>
+      <p><a class="btn primary" href="mailto:terlzrobinson@gmail.com?subject=Project Inquiry">Start a Project</a></p>
+    </section>
+  </main>
+
+  <footer class="section">
+    <small>© <span id="year"></span> Terlina Robinson. All rights reserved.</small>
+  </footer>
+
+  <script>
+    const splash = document.getElementById('splash');
+    const camera = document.getElementById('camera');
+    const site = document.getElementById('site');
+    const shutterBtn = document.getElementById('shutterBtn');
+    const skipIntro = document.getElementById('skipIntro');
+
+    const LS_KEY = 'terlina-skip-intro';
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function openShutter(){
+      camera.classList.add('open');
+      setTimeout(()=>{
+        splash.classList.add('hidden');
+        site.classList.add('visible');
+      }, prefersReduced ? 0 : 950);
+    }
+
+    // First visit logic
+    const shouldSkip = localStorage.getItem(LS_KEY) === 'true' || prefersReduced;
+    if(shouldSkip){
+      splash.classList.add('hidden');
+      camera.classList.add('open');
+      site.classList.add('visible');
+    }
+
+    shutterBtn.addEventListener('click', openShutter);
+    skipIntro.addEventListener('change', e => {
+      localStorage.setItem(LS_KEY, e.target.checked ? 'true' : 'false');
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
