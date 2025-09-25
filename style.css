@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fdf6f6;
+  color: #333;
+}
+
+header {
+  background: #f7d9e3;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.8rem;
+  color: #555;
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+header ul li a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+header ul li a:hover {
+  color: #f1a7c0;
+}
+
+.section {
+  padding: 40px;
+  text-align: center;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #f7d9e3;
+  margin-top: 20px;
+}
