@@ -1,6 +1,4 @@
-body {
-  background: yellow !important;
-}
+/* General Styles */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -11,6 +9,7 @@ body {
   height: 100vh;
 }
 
+/* Camera Screen */
 .camera-screen {
   text-align: center;
 }
